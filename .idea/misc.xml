@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.225" />
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/layout/activity_login.xml" value="0.39947916666666666" />
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/layout/activity_login2.xml" value="0.39947916666666666" />
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/layout/activity_main.xml" value="0.39947916666666666" />
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/layout/activity_maps.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/layout/activity_pin_code.xml" value="0.39947916666666666" />
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/layout/activity_scan.xml" value="0.39947916666666666" />
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/layout/express_information.xml" value="0.39947916666666666" />
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/layout/fragment_dashboard.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/layout/fragment_home.xml" value="0.4" />
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/layout/fragment_notifications.xml" value="0.4" />
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/layout/send_express_information.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/menu/bottom_nav_menu.xml" value="0.39947916666666666" />
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.358" />
+        <entry key="..\:/Users/zlaa/Desktop/meiyong/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.358" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

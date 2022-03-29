@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#7EEAFBFB"
+    tools:context=".ui.home.HomeFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="30dp">
+
+        </View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/outline_search_black_24dp"
+                app:tint="#05668D" />
+
+            <EditText
+                android:id="@+id/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:minHeight="0dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:minWidth="0dp"
+                android:backgroundTint="#028090"
+                android:minHeight="0dp"
+                android:text="@string/get_package"
+                app:backgroundTint="@color/material_on_background_emphasis_high_type"
+                app:cornerRadius="15dp"
+                app:icon="@drawable/outline_qr_code_scanner_black_24dp"
+                app:iconPadding="0dp"
+                app:iconSize="30dp">
+
+            </com.google.android.material.button.MaterialButton>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.04">
+
+            </View>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn2"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:backgroundTint="#00A896"
+                android:minHeight="0dp"
+                android:text="@string/send_package"
+                app:cornerRadius="15dp"
+                app:icon="@drawable/outline_local_shipping_black_24dp"
+                app:iconPadding="0dp"
+                app:iconSize="30dp">
+
+            </com.google.android.material.button.MaterialButton>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.04">
+
+            </View>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn3"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:backgroundTint="#04CCA1"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="@string/get_number"
+                app:cornerRadius="15dp"
+                app:icon="@mipmap/number"
+                app:iconPadding="0dp"
+                app:iconSize="30dp">
+
+            </com.google.android.material.button.MaterialButton>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="10dp">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    tools:ignore="Suspicious0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/change_list"
+                    style="@style/BigButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:backgroundTint="@color/design_default_color_background"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:paddingLeft="0dp"
+                    android:paddingTop="0dp"
+                    android:paddingRight="0dp"
+                    android:paddingBottom="0dp"
+                    android:stateListAnimator="@null"
+                    android:text="取件"
+                    android:textColor="@color/black">
+
+                </com.google.android.material.button.MaterialButton>
+
+                <ImageView
+                    android:id="@+id/line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/xian"
+                    tools:ignore="NotSibling">
+
+                </ImageView>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    tools:ignore="Suspicious0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/change_list2"
+                    style="@style/SmallButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:backgroundTint="@color/design_default_color_background"
+                    android:gravity="center|bottom"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:paddingLeft="0dp"
+                    android:paddingTop="0dp"
+                    android:paddingRight="0dp"
+                    android:paddingBottom="0dp"
+                    android:stateListAnimator="@null"
+                    android:text="寄件"
+                    android:textColor="@color/black">
+
+                </com.google.android.material.button.MaterialButton>
+
+                <ImageView
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/xian"
+                    android:visibility="invisible"
+                    tools:ignore="NotSibling">
+
+                </ImageView>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/express_list_View"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="30dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="8dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
