@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="20dp"
+                android:textSize="15sp"
                 android:text="登陆/注册" />
 
         </LinearLayout>
@@ -43,9 +44,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="13dp"
             app:cardCornerRadius="10dp">
 
             <LinearLayout
@@ -58,14 +59,14 @@
                 <LinearLayout
                     android:id="@+id/list1"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="45dp">
 
                     <ImageView
-                        android:layout_width="19dp"
-                        android:layout_height="20dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/airplane"
-                        app:tint="@color/teal_700" />
+                        app:tint="@color/teal_700"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -74,7 +75,8 @@
                         android:layout_marginStart="20dp"
                         android:gravity="center"
                         android:text="寄件订单"
-                        android:textColor="@color/teal_700">
+                        android:textColor="@color/teal_700"
+                        android:textSize="16sp">
 
                     </TextView>
 
@@ -98,11 +100,11 @@
                 <LinearLayout
                     android:id="@+id/list2"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="45dp">
 
                     <ImageView
-                        android:layout_width="19dp"
-                        android:layout_height="20dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/buggy"
                         app:tint="@color/teal_700" />
@@ -114,7 +116,8 @@
                         android:layout_marginStart="20dp"
                         android:gravity="center"
                         android:text="无人车派送订单"
-                        android:textColor="@color/teal_700">
+                        android:textColor="@color/teal_700"
+                        android:textSize="16sp">
 
                     </TextView>
 
@@ -142,9 +145,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="13dp"
             app:cardCornerRadius="10dp">
 
             <LinearLayout
@@ -157,11 +160,11 @@
                 <LinearLayout
                     android:id="@+id/list3"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="45dp">
 
                     <ImageView
-                        android:layout_width="19dp"
-                        android:layout_height="20dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/airplane"
                         app:tint="@color/teal_700" />
@@ -173,7 +176,8 @@
                         android:layout_marginStart="20dp"
                         android:gravity="center"
                         android:text="寄件订单"
-                        android:textColor="@color/teal_700">
+                        android:textColor="@color/teal_700"
+                        android:textSize="16sp">
 
                     </TextView>
 
@@ -197,11 +201,11 @@
                 <LinearLayout
                     android:id="@+id/list4"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="45dp">
 
                     <ImageView
-                        android:layout_width="19dp"
-                        android:layout_height="20dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/airplane"
                         app:tint="@color/teal_700" />
@@ -213,7 +217,8 @@
                         android:layout_marginStart="20dp"
                         android:gravity="center"
                         android:text="寄件订单"
-                        android:textColor="@color/teal_700">
+                        android:textColor="@color/teal_700"
+                        android:textSize="16sp">
 
                     </TextView>
 
@@ -237,14 +242,14 @@
                 <LinearLayout
                     android:id="@+id/list5"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="45dp">
 
                     <ImageView
-                        android:layout_width="19dp"
-                        android:layout_height="20dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/airplane"
-                        app:tint="@color/teal_700"></ImageView>
+                        app:tint="@color/teal_700"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -253,7 +258,8 @@
                         android:layout_marginStart="20dp"
                         android:gravity="center"
                         android:text="寄件订单"
-                        android:textColor="@color/teal_700">
+                        android:textColor="@color/teal_700"
+                        android:textSize="16sp">
 
                     </TextView>
 

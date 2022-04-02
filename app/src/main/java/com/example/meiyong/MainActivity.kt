@@ -1,8 +1,6 @@
 package com.example.meiyong
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -10,11 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.meiyong.databinding.ActivityMainBinding
-import com.example.meiyong.ui.home.HomeFragment
-import http.okhttp
-import okhttp3.Call
-import okhttp3.Response
-import java.io.IOException
+import http.OkHttp
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,15 +34,20 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
 
-//        okhttp.post("/User/loginIn")
-//        val url2 = "http://123.56.232.18:8080/serverdemo/tag/toggleTagFollow"
+        
+//        OkHttp.post("/User/loginIn")
+//        OkHttp.get("/Order/1")
+
+
+
+//        val url2 = "http://192.168.0.127:80/User/loginIn"
 //        okhttp.sendOkHttpRequestGET(url2, object : okhttp3.Callback {
 //            override fun onResponse(call: Call, response: Response) {
 //                val responseData = response.body?.string()
 //                Log.e("OKHTTP", "$responseData")
 //            }
 //            override fun onFailure(call: Call, e: IOException) {
-//
+//                Log.e("OKHTTP", "ERROR")
 //            }
 //        })
     }

@@ -1,7 +1,6 @@
 package com.example.meiyong.ui.home
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -20,10 +19,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.meiyong.*
 import com.example.meiyong.databinding.FragmentHomeBinding
+import com.example.meiyong.ReceiveClass.StudyjsonData
+import com.example.meiyong.ReceiveClass.StudyjsonExpressData
 import com.google.android.material.button.MaterialButton
 import com.google.gson.Gson
 import com.google.zxing.integration.android.IntentIntegrator
-import http.okhttp
+import http.OkHttp.sendOkHttpRequestGET
 import okhttp3.Call
 import okhttp3.Response
 import java.io.IOException
@@ -35,6 +36,9 @@ class HomeFragment : Fragment() {
         "http://123.56.232.18:8080/serverdemo/tag/queryTagList?offset=1231321&pageCount=10&tagId=3&tagType=all&userId=33"
     val SunAPIurl = "http://192.168.0.127:80/Order"
 
+    val PanAPIurl = "http://192.168.0.114:8081/api/tbSendOrder/list"
+
+    val YuAPIurl = "http://192.168.0.112:8081/api/tbPickOrder/list"
     private var expressList = ArrayList<StudyjsonExpressData>()
 
     private var _binding: FragmentHomeBinding? = null
@@ -53,8 +57,28 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        return root
+//        okhttp.sendOkHttpRequestGET(StudyAPIurl, object : okhttp3.Callback {
+//            override fun onResponse(call: Call, response: Response) {
+//                val gson = Gson()
+//                val responseData = response.body?.string()
+////                val typeOf = object : TypeToken<ArrayList<queryOrder>>() {}.type
+//                val express_list = gson.fromJson(responseData, StudyjsonData::class.java)
+//                expressList.clear()
+//                for ((cnt, ex) in express_list.data.data.withIndex()) {
+//                    expressList.add(cnt, ex)
+//                }
+//            }
+//
+//            override fun onFailure(call: Call, e: IOException) {
+//                Log.e("OKHTTP", "ERROR")
+//            }
+//        })
+//        val recyclerView: RecyclerView = binding.expressListView
+//        recyclerView.layoutManager = LinearLayoutManager(context)
+//        recyclerView.adapter = CardAdapter()
 
+
+        return root
     }
 
     override fun onDestroyView() {
@@ -67,14 +91,12 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 //        val view2: View = requireActivity().layoutInflater.inflate(R.layout.fragment_dashboard, null)
-        getExpressList()
 
 
 //        recyclerView.setOnTouchListener (object : View.OnTouchListener {
 //            override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
 //                p1.action ==
 //            }
-//
 //        })
     }
 
@@ -188,12 +210,14 @@ class HomeFragment : Fragment() {
         getExpressList()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun getExpressList() {
-        okhttp.sendOkHttpRequestGET(StudyAPIurl, object : okhttp3.Callback {
+        sendOkHttpRequestGET(StudyAPIurl, object : okhttp3.Callback {
             override fun onResponse(call: Call, response: Response) {
                 val gson = Gson()
                 val responseData = response.body?.string()
 //                val typeOf = object : TypeToken<ArrayList<queryOrder>>() {}.type
+                Log.e("OKHTTP","$responseData")
                 val express_list = gson.fromJson(responseData, StudyjsonData::class.java)
                 expressList.clear()
                 for ((cnt, ex) in express_list.data.data.withIndex()) {
@@ -214,6 +238,7 @@ class HomeFragment : Fragment() {
             view?.findViewById<View>(R.id.express_list_View) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = CardAdapter()
+        (recyclerView.adapter as CardAdapter).notifyDataSetChanged()
     }
 
 
@@ -285,6 +310,12 @@ class HomeFragment : Fragment() {
                 line2.setTransitionVisibility(View.VISIBLE)
             }
         })
+
+        val btnSendExpress : MaterialButton = activity?.findViewById(R.id.btn2) as MaterialButton
+        btnSendExpress.setOnClickListener {
+            val intent = Intent(activity, SendExpress::class.java)
+            startActivity(intent)
+        }
     }
 
     fun sendOrders(expressNumber: String) {

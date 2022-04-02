@@ -1,4 +1,4 @@
-package com.example.meiyong;
+package com.example.meiyong.ReceiveClass;
 
 import java.time.LocalDateTime;
 
