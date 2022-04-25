@@ -21,21 +21,24 @@
         android:theme="@style/Theme.Meiyong"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ChangePassword"
+            android:exported="false" />
+        <activity
             android:name=".SetAddress"
             android:exported="false"
-            android:label="添加地址"/>
+            android:label="添加地址" />
         <activity
             android:name=".SendExpress"
             android:exported="false"
             android:label="寄包裹" />
         <activity
             android:name=".PIN_Code"
-            android:label="取件码"
-            android:exported="false" />
+            android:exported="false"
+            android:label="取件码" />
         <activity
             android:name=".Register"
             android:exported="false"
-            android:label="注册"/>
+            android:label="注册" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false"

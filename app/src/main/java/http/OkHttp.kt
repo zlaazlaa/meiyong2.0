@@ -10,7 +10,9 @@ import java.util.concurrent.TimeUnit
 
 
 object OkHttp {
-    private const val BASE_URL = "http://192.168.0.127:80"
+    private const val BASE_URL = "http://192.168.0.118:80"
+
+    //    private const val BASE_URL = "http://192.168.0.114:8081"
     private var url1: String = ""
     private val cookieStore: HashMap<String, List<Cookie>> = HashMap()
     private val client: OkHttpClient = OkHttpClient.Builder()
@@ -20,28 +22,31 @@ object OkHttp {
         .cookieJar(object : CookieJar {
             override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
                 cookieStore[url.host] = cookies
-                Log.e("OKHTTP", cookieStore[url.host].toString())
-                url1 = cookies.toString().substring(cookies.toString().indexOf('=') + 1,cookies.toString().indexOf(';'))
+                if (url1 == "") url1 =
+                    cookies.toString().substring(1, cookies.toString().indexOf(';'))
+                Log.e("OKHTTP  123", cookieStore[url.host].toString())
             }
-
 
             override fun loadForRequest(url: HttpUrl): List<Cookie> {
                 val cookies = cookieStore[url.host]
+                Log.e("OKHTTPCOOKIE", cookies.toString())
                 return cookies ?: ArrayList()
             }
         })
         .build()
+
+
     fun get(string: String) {
-        Log.e("OKHTTP",cookieStore["192.168.0.127"].toString())
+//        Log.e("OKHTTP    124",cookieStore["192.168.0.127"].toString())
         Thread(Runnable {
             val request: Request = Request.Builder()
                 .url(BASE_URL + string)
-                .addHeader("Cookie", cookieStore["192.168.0.127"].toString())
+//                .addHeader("Cookie", url1)
                 .build()
             val call: Call = client.newCall(request)
             val response = call.execute()
             val body = response.body?.string()
-            Log.e("OKHTTP", "get response: $body")
+            Log.e("OKHTTP11", "get response: $body")
         }).start()
     }
 
@@ -52,24 +57,19 @@ object OkHttp {
         val call: Call = client.newCall(request)
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.e("OKHTTP", "ERRORvsdkujvhsdajikvhsdvhjksdv:${e.message}")
+                Log.e("OKHTTP  125", "ERRORvsdkujvhsdajikvhsdvhjksdv:${e.message}")
             }
 
             override fun onResponse(call: Call, response: Response) {
                 val body = response.body?.string()
-                Log.e("OKHTTP", "get response: $body")
+                Log.e("OKHTTP  126", "get response: $body")
             }
         })
     }
 
 
     private val jsonType get() = "application/json; charset=utf-8".toMediaTypeOrNull()
-    fun post(string: String) {
-        val jsonObject = JSONObject()
-        jsonObject
-            .put("username", "11")
-            .put("password", "2222")
-
+    fun post(string: String, jsonObject: JSONObject, callback: Callback) {
 
         val body: RequestBody = jsonObject.toString().toRequestBody(jsonType)
 
@@ -78,11 +78,20 @@ object OkHttp {
             .url(BASE_URL + string)
             .post(body)
             .build()
-        val call = client.newCall(request)
-        Thread(Runnable {
-            val response = call.execute()
-            Log.e("OKHTTP", "${response.body?.string()}")
-        }).start()
+        client.newCall(request).enqueue(callback)
+    }
+
+
+    fun put(string: String, jsonObject: JSONObject, callback: Callback) {
+        val body: RequestBody = jsonObject.toString().toRequestBody(jsonType)
+
+        val request: Request = Request
+            .Builder()
+            .url(BASE_URL + string)
+            .put(body)
+            .build()
+        client.newCall(request).enqueue(callback)
+
     }
 
 //    private val cookieJar: CookieJar = object : CookieJar {
@@ -98,18 +107,21 @@ object OkHttp {
 
 
     fun yipost(string: String) {
-        val body = FormBody.Builder().build()
+        val body = FormBody.Builder()
+            .add("account", "yu")
+            .add("password", "125")
+            .build()
         val request = Request.Builder().url(BASE_URL + string)
             .post(body)
             .build()
         val call = client.newCall(request)
         val response = call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.e("OKHTTP", "ERROR")
+                Log.e("OKHTTP  128", "ERROR")
             }
 
             override fun onResponse(call: Call, response: Response) {
-                Log.e("OKHTTP", "${response.body?.string()}")
+                Log.e("OKHTTP   129", "${response.body?.string()}")
             }
         })
     }
@@ -121,6 +133,7 @@ object OkHttp {
             .build()
         client.newCall(request).enqueue(callback)
     }
+
 
 }
 

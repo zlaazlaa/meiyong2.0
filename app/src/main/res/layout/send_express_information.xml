@@ -6,85 +6,104 @@
     android:layout_height="wrap_content"
     android:paddingTop="8dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <View
-            android:layout_width="30dp"
-            android:layout_height="match_parent">
-
-        </View>
-
-        <ImageView
-            android:id="@+id/imageView_express_company"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/express"
-            app:tint="#05668D"
-            tools:ignore="RtlHardcoded" />
-        <View
-            android:layout_width="30dp"
-            android:layout_height="0dp">
-
-        </View>
-
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView_express_statement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="已到达"
+            </View>
 
-                tools:ignore="NestedWeights"
-                tools:layout_editor_absoluteX="118dp"
-                tools:layout_editor_absoluteY="104dp" />
+            <ImageView
+                android:id="@+id/imageView_express_company"
+                android:layout_width="49dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="2dp"
+                android:layout_gravity="center_vertical"
+                app:srcCompat="@drawable/express"
+                app:tint="#05668D"
+                tools:ignore="RtlHardcoded" />
+            <View
+                android:layout_width="30dp"
+                android:layout_height="match_parent">
+
+            </View>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textView_express_statement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="运单号：">
+                    android:text="已到达"
 
-                </TextView>
+                    tools:ignore="NestedWeights"
+                    tools:layout_editor_absoluteX="118dp"
+                    tools:layout_editor_absoluteY="104dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="运单号：">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/textView_express_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="873612844124124"
+                        android:textSize="13sp"
+                        tools:layout_editor_absoluteX="118dp"
+                        tools:layout_editor_absoluteY="143dp" />
+                </LinearLayout>
+
 
                 <TextView
-                    android:id="@+id/textView_express_number"
-                    android:layout_width="0dp"
+                    android:id="@+id/textView_express_information"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="873612844124124"
+                    android:text="您的包裹由2号无人车运送"
                     tools:layout_editor_absoluteX="118dp"
                     tools:layout_editor_absoluteY="143dp" />
             </LinearLayout>
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/textView_express_information"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="您的包裹由2号无人车运送"
-                tools:layout_editor_absoluteX="118dp"
-                tools:layout_editor_absoluteY="143dp" />
+            </View>
         </LinearLayout>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+    </androidx.cardview.widget.CardView>
 
-        </View>
-    </LinearLayout>
 
 </LinearLayout>
