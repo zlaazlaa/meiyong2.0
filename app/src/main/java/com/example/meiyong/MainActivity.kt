@@ -2,7 +2,6 @@ package com.example.meiyong
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -10,15 +9,21 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.meiyong.databinding.ActivityMainBinding
-import http.OkHttp
-import http.OkHttp.sendOkHttpRequestGET
+import com.google.gson.Gson
+import http.GetGPSReturnData.Coordinate
+import http.GetGPSReturnData.GetGPSReturn
+import http.LoginReturnData.LoginReturn
 import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.FormBody
 import okhttp3.Response
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +45,10 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
 
-        
+
+        val GPSSSS = GPSGetClass()
+        GPSSSS.LoginGPS()
+
 //        OkHttp.post("/User/loginIn")
 //
 //
@@ -56,7 +64,6 @@ class MainActivity : AppCompatActivity() {
 //        findViewById<Button>(R.id.button_get).setOnClickListener {
 //            OkHttp.get("/Order/1")
 //        }
-
 
 
 //        val url2 = "http://192.168.0.127:80/Order/1"

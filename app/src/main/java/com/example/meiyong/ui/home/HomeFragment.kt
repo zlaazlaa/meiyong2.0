@@ -1,6 +1,7 @@
 package com.example.meiyong.ui.home
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -24,6 +25,7 @@ import com.example.meiyong.ReceiveClass.StudyjsonExpressData
 import com.google.android.material.button.MaterialButton
 import com.google.gson.Gson
 import com.google.zxing.integration.android.IntentIntegrator
+import http.OkHttp.get
 import http.OkHttp.sendOkHttpRequestGET
 import okhttp3.Call
 import okhttp3.Response

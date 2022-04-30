@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.meiyong.ChangePassword
+import com.example.meiyong.GPSGetClass
 import com.example.meiyong.MapsActivity
 import com.example.meiyong.R
 import com.example.meiyong.databinding.FragmentDashboardBinding
@@ -108,6 +109,11 @@ class DashboardFragment : Fragment() {
 
         activity?.findViewById<Button>(R.id.button_get_order)!!.setOnClickListener {
             OkHttp.get("/Order/1")
+        }
+
+        activity?.findViewById<Button>(R.id.GPS_LOGIN)!!.setOnClickListener {
+            val GPSS = GPSGetClass()
+            GPSS.LoginGPS()
         }
     }
 }
