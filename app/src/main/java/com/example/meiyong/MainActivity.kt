@@ -1,28 +1,27 @@
 package com.example.meiyong
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.amap.api.maps.AMapWrapper
 import com.example.meiyong.databinding.ActivityMainBinding
-import com.google.gson.Gson
-import http.GetGPSReturnData.Coordinate
-import http.GetGPSReturnData.GetGPSReturn
-import http.LoginReturnData.LoginReturn
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.FormBody
-import okhttp3.Response
-import java.io.IOException
+import com.example.meiyong.webview.MAWebViewWrapper
+import com.example.meiyong.webview.MyWebView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,16 +43,34 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
-
         val GPSSSS = GPSGetClass()
         GPSSSS.LoginGPS()
 
+
+
+
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+//            != PackageManager.PERMISSION_GRANTED
+//            || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+//            != PackageManager.PERMISSION_GRANTED
+//            || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//            != PackageManager.PERMISSION_GRANTED
+//        ) {
+////            Toast.makeText(applicationContext, "没有权限,请手动开启定位权限", Toast.LENGTH_SHORT).show()
+//        // 申请一个（或多个）权限，并提供用于回调返回的获取码（用户定义）
+//            ActivityCompat.requestPermissions(
+//                this@MainActivity,
+//                arrayOf(
+//                    Manifest.permission.ACCESS_COARSE_LOCATION,
+//                    Manifest.permission.ACCESS_FINE_LOCATION,
+//                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+//                ),
+//                100
+//            )
+//        }
+
 //        OkHttp.post("/User/loginIn")
-//
-//
-//
-//
+
 //        OkHttp.get("/Order/1")
 
 
@@ -77,4 +94,5 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        })
     }
+
 }

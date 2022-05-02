@@ -10,10 +10,8 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.meiyong.ChangePassword
-import com.example.meiyong.GPSGetClass
-import com.example.meiyong.MapsActivity
-import com.example.meiyong.R
+import com.example.meiyong.GaodeMapActivity
+import com.example.meiyong.*
 import com.example.meiyong.databinding.FragmentDashboardBinding
 import http.OkHttp
 import okhttp3.Call
@@ -114,6 +112,15 @@ class DashboardFragment : Fragment() {
         activity?.findViewById<Button>(R.id.GPS_LOGIN)!!.setOnClickListener {
             val GPSS = GPSGetClass()
             GPSS.LoginGPS()
+        }
+
+        activity?.findViewById<Button>(R.id.OpenGaoDeMap)!!.setOnClickListener {
+            val intent = Intent(activity, GaodeMapActivity::class.java)
+//            intent.putExtra("code","1")
+//            startActivity(intent)
+//            val intent2 = Intent(activity, GaodeMapActivity::class.java)
+//            intent2.putExtra("code","2")
+            startActivity(intent)
         }
     }
 }

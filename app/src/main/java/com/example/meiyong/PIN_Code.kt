@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
 import android.widget.TextView
 import http.OkHttp.get
 import http.OkHttp.sendOkHttpRequestGET
