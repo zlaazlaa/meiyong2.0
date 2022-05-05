@@ -20,6 +20,7 @@ import com.amap.api.maps.model.*
 import com.example.meiyong.R
 import com.example.meiyong.webview.MAWebViewWrapper
 import com.example.meiyong.webview.MyWebView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import http.OkHttp
 import okhttp3.Call
 import okhttp3.Request
@@ -55,13 +56,17 @@ class GaodeMapActivity : AppCompatActivity(), AMap.OnMarkerClickListener {
         aMapWrapper = AMapWrapper(this, webViewWrapper)
 
 
+//        val aMapWrapper = GetAMapWrapper().returnAMapWrapper(this)
+
+
+
 //        webView!!.setOnTouchListener(OnTouchListener { view, motionEvent ->
 //            aMapWrapper!!.onTouchEvent(
 //                motionEvent
 //            )
 //        })
-        aMapWrapper!!.onCreate() // 此方法必须重写
-        aMapWrapper!!.getMapAsyn { map ->
+        aMapWrapper?.onCreate() // 此方法必须重写
+        aMapWrapper?.getMapAsyn { map ->
             aMap = map
             aMap!!.setOnMapLongClickListener { point ->
                 Log.e(
@@ -71,6 +76,19 @@ class GaodeMapActivity : AppCompatActivity(), AMap.OnMarkerClickListener {
             }
             addMarkersToMap() // 往地图上添加marker
         }
+
+
+        val bottomSheet: View = findViewById(R.id.bottom_sheet)
+        val behavior = BottomSheetBehavior.from<View>(bottomSheet)
+        behavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                //这里是bottomSheet状态的改变
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                //这里是拖拽中的回调，根据slideOffset可以做一些动画
+            }
+        })
     }
 
     /**

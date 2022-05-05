@@ -122,5 +122,10 @@ class DashboardFragment : Fragment() {
 //            intent2.putExtra("code","2")
             startActivity(intent)
         }
+
+        activity?.findViewById<Button>(R.id.go_to_bottom_sheet_test)?.setOnClickListener {
+            val intent = Intent(activity, bottom_sheet_test::class.java)
+            startActivity(intent)
+        }
     }
 }

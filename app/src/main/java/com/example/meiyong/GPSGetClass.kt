@@ -45,7 +45,8 @@ class GPSGetClass {
             .add("imei", "65302631125")
             .add("coorType", "bd09ll")//BaiduMap
 //            .add("coorType", "GCJ02")//GoogleMap
-            .add("token", GPSLoginInformation.data.token)
+//            .add("token", GPSLoginInformation.data.token)
+            .add("token", "8e1f56bf0e78669fdf774c91c55ed0f147047d1eb4b2ecf7284c90924c0b30ff")
             .build()
         http.GPSOkHttp.post("/locator-app/redis/getGps", GetGPSFormBody, object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -57,10 +58,13 @@ class GPSGetClass {
                 Log.e("OKHTTP_GPS_GET_GPS", "$responseData")
                 val gson = Gson()
                 GPSGetReturn = gson.fromJson(responseData, GetGPSReturn::class.java)
+                if(GPSGetReturn.code == 100401) {
+                    UpdateCoordinate()
+                    return
+                }
                 GPSCoordinate.Latitude = GPSGetReturn.data.latitude
                 GPSCoordinate.Longitude = GPSGetReturn.data.longitude
             }
-
         })
     }
 

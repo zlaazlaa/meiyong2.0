@@ -1,11 +1,10 @@
 package com.example.meiyong.ui.home
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,22 +13,18 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.meiyong.*
-import com.example.meiyong.databinding.FragmentHomeBinding
-import com.example.meiyong.ReceiveClass.StudyjsonData
 import com.example.meiyong.ReceiveClass.StudyjsonExpressData
+import com.example.meiyong.data.Data
+import com.example.meiyong.databinding.FragmentHomeBinding
 import com.google.android.material.button.MaterialButton
-import com.google.gson.Gson
 import com.google.zxing.integration.android.IntentIntegrator
-import http.OkHttp.get
-import http.OkHttp.sendOkHttpRequestGET
-import okhttp3.Call
-import okhttp3.Response
-import java.io.IOException
 
 
 class HomeFragment : Fragment() {
@@ -44,6 +39,7 @@ class HomeFragment : Fragment() {
     private var expressList = ArrayList<StudyjsonExpressData>()
 
     private var _binding: FragmentHomeBinding? = null
+    private val handler: Handler = Handler()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -88,9 +84,26 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+//        object : Thread() {
+//            override fun run() {
+        if(Data.expressList.size == 0) Data().updateExpressData()
+        expressList = Data.expressList
+//            }
+//        }.start()
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
+//        handler.post(Runnable { //这里写你原来要执行的业务逻辑
+        showExpressList()
+//        })
+
 
 //        val view2: View = requireActivity().layoutInflater.inflate(R.layout.fragment_dashboard, null)
 
@@ -108,6 +121,7 @@ class HomeFragment : Fragment() {
             val txt_express_statement: TextView = view.findViewById(R.id.textView_express_statement)
             val txt_express_number: TextView = view.findViewById(R.id.textView_express_number)
             val btn_operation: Button = view.findViewById(R.id.button_operation)
+            val cardview: CardView = view.findViewById(R.id.express_card_view)
         }
 
         @SuppressLint("ResourceAsColor")
@@ -130,6 +144,10 @@ class HomeFragment : Fragment() {
                     startActivity(intent)
                 }
             }
+            viewHolder.cardview.setOnClickListener {
+                val intent = Intent(activity, GaodeMapActivity::class.java)
+                startActivity(intent)
+            }
             return ViewHolder(view)
         }
 
@@ -138,6 +156,8 @@ class HomeFragment : Fragment() {
         @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
+//            val express = expressList[position]
+            val expressList: ArrayList<StudyjsonExpressData> = Data.expressList
             val express = expressList[position]
             holder.itemView.findViewById<ImageView>(R.id.imageView_express_company)
                 .setImageResource(R.drawable.jd)
@@ -182,7 +202,7 @@ class HomeFragment : Fragment() {
         }
 
         override fun getItemCount(): Int {
-            return 1000
+            return 16
         }
 
     }
@@ -197,45 +217,25 @@ class HomeFragment : Fragment() {
 //        } else {
 //            isGetData = false
 //        }
-        getExpressList()
+        showExpressList()
         return super.onCreateAnimation(transit, enter, nextAnim)
     }
 
     override fun onResume() {
         super.onResume()
-        getExpressList()
+        showExpressList()
+//        Data().updateExpressData()
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
         // TODO Auto-generated method stub
         super.onHiddenChanged(hidden)
-        getExpressList()
+        showExpressList()
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun getExpressList() {
-        sendOkHttpRequestGET(StudyAPIurl, object : okhttp3.Callback {
-            override fun onResponse(call: Call, response: Response) {
-                val gson = Gson()
-                val responseData = response.body?.string()
-//                val typeOf = object : TypeToken<ArrayList<queryOrder>>() {}.type
-                Log.e("OKHTTP","$responseData")
-                val express_list = gson.fromJson(responseData, StudyjsonData::class.java)
-                expressList.clear()
-                for ((cnt, ex) in express_list.data.data.withIndex()) {
-                    expressList.add(cnt, ex)
-                }
-
-//                val express_list = gson.fromJson(responseData, queryOrder::class.java)
-//                for ((cnt, ex) in express_list) {
-//                    expressList.add(cnt, ex)
-//                }
-            }
-
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("OKHTTP", "ERROR")
-            }
-        })
+    fun showExpressList() {
+        expressList = Data.expressList
         val recyclerView: RecyclerView =
             view?.findViewById<View>(R.id.express_list_View) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -249,9 +249,8 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         //get express list from server
         //Scan QR code
-        val btnScan: MaterialButton = activity?.findViewById<View>(R.id.btn1) as MaterialButton
-        btnScan.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
+        view?.findViewById<MaterialButton>(R.id.btn1)
+            ?.setOnClickListener {
                 val integrator = IntentIntegrator.forSupportFragment(this@HomeFragment)
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES)
                 integrator.captureActivity = ScanActivity::class.java
@@ -261,22 +260,17 @@ class HomeFragment : Fragment() {
                 integrator.setBarcodeImageEnabled(true)
                 integrator.initiateScan()
             }
-        })
 
-        val btnGetNumber: MaterialButton = activity?.findViewById<View>(R.id.btn3) as MaterialButton
-        btnGetNumber.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
+        view?.findViewById<MaterialButton>(R.id.btn3)
+            ?.setOnClickListener {
                 val intent = Intent(activity, PIN_Code::class.java)
                 startActivity(intent)
             }
-        })
 
         //Refresh express list
-        val btnChangeList: MaterialButton =
-            activity?.findViewById<View>(R.id.change_list) as MaterialButton
-        btnChangeList.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(p0: View?) {
-                getExpressList()
+        view?.findViewById<MaterialButton>(R.id.change_list)
+            ?.setOnClickListener {
+                showExpressList()
                 val bt1: MaterialButton =
                     activity?.findViewById<View>(R.id.change_list) as MaterialButton
                 val bt2: MaterialButton =
@@ -287,15 +281,11 @@ class HomeFragment : Fragment() {
                 val line2: ImageView = activity?.findViewById<View>(R.id.line2) as ImageView
                 line1.setTransitionVisibility(View.VISIBLE)
                 line2.setTransitionVisibility(View.INVISIBLE)
-
             }
-        })
 
         //Refresh express list2
-        val btnChangeList2: MaterialButton =
-            activity?.findViewById<View>(R.id.change_list2) as MaterialButton
-        btnChangeList2.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(p0: View?) {
+        view?.findViewById<MaterialButton>(R.id.change_list2)
+            ?.setOnClickListener {
                 val recyclerView: RecyclerView =
                     view?.findViewById<View>(R.id.express_list_View) as RecyclerView
                 recyclerView.layoutManager = LinearLayoutManager(context)
@@ -311,10 +301,8 @@ class HomeFragment : Fragment() {
                 line1.setTransitionVisibility(View.INVISIBLE)
                 line2.setTransitionVisibility(View.VISIBLE)
             }
-        })
 
-        val btnSendExpress : MaterialButton = activity?.findViewById(R.id.btn2) as MaterialButton
-        btnSendExpress.setOnClickListener {
+        view?.findViewById<MaterialButton>(R.id.btn2)?.setOnClickListener {
             val intent = Intent(activity, SendExpress::class.java)
             startActivity(intent)
         }

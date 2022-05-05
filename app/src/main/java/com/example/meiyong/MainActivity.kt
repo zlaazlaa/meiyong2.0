@@ -13,6 +13,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.amap.api.maps.AMapWrapper
+import com.example.meiyong.data.Data
 import com.example.meiyong.databinding.ActivityMainBinding
 import com.example.meiyong.webview.MAWebViewWrapper
 import com.example.meiyong.webview.MyWebView
@@ -23,6 +24,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    companion object {
+        var webView: MyWebView? = null
+        var aMapWrapper: AMapWrapper? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +48,19 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val GPSSSS = GPSGetClass()
-        GPSSSS.LoginGPS()
+//        val GPSSSS = GPSGetClass()
+//        GPSSSS.LoginGPS()
+
+//        GetAMapWrapper().getAMapWrapper(this)
+
+        Data().updateExpressData()
 
 
+
+//        setContentView(R.layout.activity_gaode_map)
+//        webView = findViewById<View>(R.id.gao_de_map) as MyWebView
+//        val webViewWrapper = MAWebViewWrapper(webView)
+//        aMapWrapper = AMapWrapper(this, webViewWrapper)
 
 
 //        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
