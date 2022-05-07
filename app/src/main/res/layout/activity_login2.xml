@@ -17,15 +17,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            android:layout_height="70dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="30dp"
-            android:paddingBottom="10dp"
-            android:text="注册账号"/>
 
         <EditText
             android:id="@+id/username"

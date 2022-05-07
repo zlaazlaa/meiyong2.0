@@ -14,7 +14,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -127,7 +126,7 @@ class HomeFragment : Fragment() {
         @SuppressLint("ResourceAsColor")
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardAdapter.ViewHolder {
             val view =
-                LayoutInflater.from(context).inflate(R.layout.express_information, parent, false)
+                LayoutInflater.from(context).inflate(R.layout.express_information_card, parent, false)
             val viewHolder = ViewHolder(view)
             viewHolder.btn_operation.setOnClickListener {
                 if (viewHolder.itemView.findViewById<MaterialButton>(R.id.button_operation).text == "无人车派送") {
@@ -146,6 +145,7 @@ class HomeFragment : Fragment() {
             }
             viewHolder.cardview.setOnClickListener {
                 val intent = Intent(activity, GaodeMapActivity::class.java)
+                intent.putExtra("express_id", "312132262436653:2625")
                 startActivity(intent)
             }
             return ViewHolder(view)

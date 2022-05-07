@@ -109,7 +109,7 @@
                 android:backgroundTint="#05668D"
                 android:text="无人车派送"
                 android:textSize="12sp"
-                app:cornerRadius="30dp"
+                app:cornerRadius="20dp"
                 tools:ignore="RtlHardcoded">
 
             </com.google.android.material.button.MaterialButton>

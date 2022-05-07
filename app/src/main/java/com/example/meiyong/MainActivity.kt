@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,10 @@ import com.example.meiyong.databinding.ActivityMainBinding
 import com.example.meiyong.webview.MAWebViewWrapper
 import com.example.meiyong.webview.MyWebView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import http.OkHttp
+import okhttp3.*
+import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Data().updateExpressData()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -53,7 +59,9 @@ class MainActivity : AppCompatActivity() {
 
 //        GetAMapWrapper().getAMapWrapper(this)
 
-        Data().updateExpressData()
+
+
+
 
 
 

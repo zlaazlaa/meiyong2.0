@@ -4,10 +4,17 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
+import http.OkHttp
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
+import org.json.JSONObject
+import java.io.IOException
 
 
 class SendExpress : AppCompatActivity() {
@@ -39,6 +46,36 @@ class SendExpress : AppCompatActivity() {
 
         findViewById<LinearLayout>(R.id.end_address_data).setOnClickListener {
             editAddress(2)
+        }
+
+        findViewById<MaterialButton>(R.id.cancel_button).setOnClickListener {
+            finish()
+        }
+
+        findViewById<MaterialButton>(R.id.confirm_button).setOnClickListener {
+            val receiveName = findViewById<TextView>(R.id.name_edited2).text
+            val receivePhone = findViewById<TextView>(R.id.phone_number_edited2).text
+
+            val jsonObjects = JSONObject()
+            jsonObjects
+                .put("receiverName", receiveName.toString())
+                .put("phone", receivePhone.toString())
+                .put("deliveryAddress", 1)
+                .put("packagePos", "aa")
+                .put("stationId", 2)
+            OkHttp.post("/Order", jsonObjects, object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    TODO("Not yet implemented")
+                    Log.e("OKHTTP_NEW_ORDER", e.toString())
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+//                    TODO("Not yet implemented")
+                    Log.e("OKHTTP_NEW_ORDER", "${response.body?.string()}")
+                }
+
+            })
+            finish()
         }
 
     }

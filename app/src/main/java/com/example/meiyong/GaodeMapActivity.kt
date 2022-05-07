@@ -1,29 +1,33 @@
 package com.example.meiyong
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnTouchListener
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.amap.api.maps.AMap
 import com.amap.api.maps.AMapWrapper
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.*
-import com.example.meiyong.R
+import com.example.meiyong.MyApplication.Companion.context
+import com.example.meiyong.ReturnDataClass.Express100Return.Express100Return
+import com.example.meiyong.ReturnDataClass.Express100Return.List
 import com.example.meiyong.webview.MAWebViewWrapper
 import com.example.meiyong.webview.MyWebView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import http.OkHttp
-import okhttp3.Call
-import okhttp3.Request
+import com.google.gson.Gson
+import okhttp3.*
+import java.io.IOException
+import java.util.concurrent.TimeUnit
+import kotlin.concurrent.timer
 
 /**
  * AMapV2地图中简单介绍一些Marker的用法.
@@ -34,6 +38,9 @@ class GaodeMapActivity : AppCompatActivity(), AMap.OnMarkerClickListener {
     private var webView: MyWebView? = null
     private var latlng = LatLng(39.761, 116.434)
     private var aMapWrapper: AMapWrapper? = null
+    lateinit var expressInformationList: ArrayList<List>
+    val handler: Handler = Handler()
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +66,6 @@ class GaodeMapActivity : AppCompatActivity(), AMap.OnMarkerClickListener {
 //        val aMapWrapper = GetAMapWrapper().returnAMapWrapper(this)
 
 
-
 //        webView!!.setOnTouchListener(OnTouchListener { view, motionEvent ->
 //            aMapWrapper!!.onTouchEvent(
 //                motionEvent
@@ -77,6 +83,12 @@ class GaodeMapActivity : AppCompatActivity(), AMap.OnMarkerClickListener {
             addMarkersToMap() // 往地图上添加marker
         }
 
+        val expressId = intent.getStringExtra("express_id")
+        if (expressId != null) {
+            findViewById<TextView>(R.id.express_id).text = expressId
+            showExpressDetails(expressId)
+        }
+
 
         val bottomSheet: View = findViewById(R.id.bottom_sheet)
         val behavior = BottomSheetBehavior.from<View>(bottomSheet)
@@ -89,6 +101,65 @@ class GaodeMapActivity : AppCompatActivity(), AMap.OnMarkerClickListener {
                 //这里是拖拽中的回调，根据slideOffset可以做一些动画
             }
         })
+    }
+
+    private fun showExpressDetails(id: String) {
+        val client: OkHttpClient = OkHttpClient.Builder()
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .build()
+        val request: Request = Request
+            .Builder()
+            .header("Authorization", "APPCODE 6515cd7e7b7648de91332d24a8ce85a0")
+            .url("https://kuaidi100.market.alicloudapi.com/getExpress?NO=$id&TYPE=AUTO")
+            .get()
+            .build()
+        val call: Call = client.newCall(request)
+        call.enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("OKHTTP  125", "ERRORvsdkujvhsdajikvhsdvhjksdv:${e.message}")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val responseData = response.body?.string()
+                Log.e("OKHTTP  126", "get response: $responseData")
+                val gson = Gson()
+                val express100Return = gson.fromJson(responseData, Express100Return::class.java)
+                expressInformationList = express100Return.list!!
+                handler.post {
+                    updateExpressList()
+                }
+            }
+        })
+    }
+
+    fun updateExpressList() {
+        val recycleView = findViewById<RecyclerView>(R.id.express_detail_list)
+        recycleView.layoutManager = LinearLayoutManager(context)
+        recycleView.adapter = ExpressDetailAdapter()
+    }
+    inner class ExpressDetailAdapter : RecyclerView.Adapter<ExpressDetailAdapter.ViewHolder>() {
+        inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
+            val time : TextView = view.findViewById(R.id.time)
+            val content : TextView = view.findViewById(R.id.content)
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.express_detail_card, parent, false)
+            return ViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            val express = expressInformationList[position]
+            holder.time.text = express.time
+            holder.content.text = express.content
+        }
+
+        override fun getItemCount(): Int {
+            return expressInformationList.size
+        }
+
     }
 
     /**
@@ -137,7 +208,6 @@ class GaodeMapActivity : AppCompatActivity(), AMap.OnMarkerClickListener {
      * 在地图上添加marker
      */
     private fun addMarkersToMap() {
-
 
 
         val GPS_84 = GPSGetClass.GPSCoordinate

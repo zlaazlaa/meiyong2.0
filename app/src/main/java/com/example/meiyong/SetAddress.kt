@@ -1,5 +1,6 @@
 package com.example.meiyong
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -51,6 +52,7 @@ class SetAddress : AppCompatActivity() {
         finish()
     }
 
+    @SuppressLint("CutPasteId")
     private fun initData(intent: Intent) {
         val name = intent.getStringExtra("name")
         val phoneNumber = intent.getStringExtra("phone_number")
@@ -59,8 +61,14 @@ class SetAddress : AppCompatActivity() {
         val district = intent.getStringExtra("district")
         val detailAddress = intent.getStringExtra("detail_address")
         when (intent.getStringExtra("code")) {
-            "1" -> findViewById<TextView>(R.id.address_title).text = "寄件地址信息"
-            "2" -> findViewById<TextView>(R.id.address_title).text = "收件地址信息"
+            "1" -> {
+                findViewById<TextView>(R.id.address_title).text = "寄件地址信息(从哪寄)"
+                findViewById<EditText>(R.id.name).hint="寄件人姓名"
+            }
+            "2" -> {
+                findViewById<TextView>(R.id.address_title).text = "收件地址信息(要寄到哪里)"
+                findViewById<EditText>(R.id.name).hint="收件人姓名"
+            }
         }
         if (name != "姓名")
             findViewById<TextView>(R.id.name).text = name

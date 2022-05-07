@@ -50,6 +50,15 @@ object OkHttp {
         }).start()
     }
 
+    fun get(string: String, callback: Callback) {
+        val request: Request = Request
+            .Builder()
+            .url(BASE_URL + string)
+            .get()
+            .build()
+        client.newCall(request).enqueue(callback)
+    }
+
     fun yiget(string: String) {
         val request: Request = Request.Builder()
             .url(BASE_URL + string)
