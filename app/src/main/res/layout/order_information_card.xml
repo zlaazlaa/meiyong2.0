@@ -112,6 +112,11 @@
                                 android:text="" />
                     </LinearLayout>
 
+                    <TextView
+                            android:id="@+id/order_status"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"/>
+
 
                 </LinearLayout>
 

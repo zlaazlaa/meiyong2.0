@@ -129,5 +129,10 @@ class DashboardFragment : Fragment() {
             startActivity(intent)
         }
 
+        activity?.findViewById<Button>(R.id.youtube_button)!!.setOnClickListener {
+            val intent = Intent(activity, youtube::class.java)
+            startActivity(intent)
+        }
+
     }
 }

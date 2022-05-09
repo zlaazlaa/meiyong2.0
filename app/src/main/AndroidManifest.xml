@@ -21,13 +21,19 @@
             android:theme="@style/Theme.Meiyong"
             android:usesCleartextTraffic="true">
         <activity
+                android:name=".youtube"
+                android:exported="false" />
+        <activity
                 android:name=".ManageOrders"
                 android:exported="false"
                 android:label="订单列表" />
         <activity
                 android:name=".bottom_sheet_test"
                 android:exported="false" />
-        <activity android:name=".GaodeMapActivity" />
+        <activity
+                android:name=".GaodeMapActivity"
+                android:exported="false"
+                android:label="包裹详情" />
         <activity
                 android:name=".ChangePassword"
                 android:exported="false"

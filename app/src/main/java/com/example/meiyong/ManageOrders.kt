@@ -62,7 +62,7 @@ class ManageOrders : AppCompatActivity() {
                     Looper.prepare();
                     Toast.makeText(context, "用户未登录", Toast.LENGTH_LONG).show()
                     finish()
-                    Looper.loop();
+                    Looper.loop()
 
                 }
             }
@@ -80,6 +80,7 @@ class ManageOrders : AppCompatActivity() {
             val address: TextView = view.findViewById(R.id.address)
             val cuiOrder: MaterialButton = view.findViewById(R.id.cui_order)
             val cancelOrder: MaterialButton = view.findViewById(R.id.cancel_order)
+            val orderStatus: TextView = view.findViewById(R.id.order_status)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -88,24 +89,29 @@ class ManageOrders : AppCompatActivity() {
             val viewHolder = ViewHolder(view)
             viewHolder.cancelOrder.setOnClickListener {
                 val jsonObject = JSONObject()
-                val id = viewHolder.orderId.text.toString().toInt()
-                jsonObject
-                    .put("reason", "用户主动取消订单")
-                    .put("orderId", id)
-                OkHttp.post("/Order/cancel", jsonObject, object : Callback {
-                    override fun onFailure(call: Call, e: IOException) {
-                        Log.e("OKHTTP_CANCEL_ORDER_ERROR", e.toString())
-                    }
+                val id = viewHolder.orderId.text.toString().toLong()
+                val status = viewHolder.orderStatus.text.toString()
+                if (status != "3") {
+                    Toast.makeText(context, "订单未在派送", Toast.LENGTH_LONG).show()
+                } else {
+                    jsonObject
+                        .put("reason", "用户主动取消订单")
+                        .put("orderId", id)
+                    OkHttp.post("/Order/cancel", jsonObject, object : Callback {
+                        override fun onFailure(call: Call, e: IOException) {
+                            Log.e("OKHTTP_CANCEL_ORDER_ERROR", e.toString())
+                        }
 
-                    override fun onResponse(call: Call, response: Response) {
-                        val responseData = response.body?.string()
-                        Looper.prepare()
-                        Toast.makeText(context, "$responseData", Toast.LENGTH_LONG).show()
-                        Looper.loop()
-                        Log.e("OKHTTP_CANCEL_ORDER", "$responseData")
-                    }
+                        override fun onResponse(call: Call, response: Response) {
+                            val responseData = response.body?.string()
+                            Looper.prepare()
+                            Toast.makeText(context, "$responseData", Toast.LENGTH_LONG).show()
+                            Looper.loop()
+                            Log.e("OKHTTP_CANCEL_ORDER", "$responseData")
+                        }
 
-                })
+                    })
+                }
             }
             return ViewHolder(view)
         }
@@ -116,6 +122,7 @@ class ManageOrders : AppCompatActivity() {
             holder.orderId.text = order.orderId.toString()
             holder.phone.text = order.phone
             holder.address.text = order.deliverDeviceId.toString()
+            holder.orderStatus.text = order.status.toString()
         }
 
         override fun getItemCount(): Int {
