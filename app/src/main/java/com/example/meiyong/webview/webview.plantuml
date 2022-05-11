@@ -1,24 +1,20 @@
 @startuml
 
-title __MEIYONG.APP's Class Diagram__\n
-
-  namespace com.example.meiyong {
-    class com.example.meiyong.BuildConfig {
-    }
-  }
-  
-
-  namespace com.example.meiyong {
-    namespace ReceiveClass {
-      class com.example.meiyong.ReceiveClass.queryOrder {
-      }
-    }
-  }
-  
+title __WEBVIEW's Class Diagram__\n
 
   namespace com.example.meiyong {
     namespace webview {
       class com.example.meiyong.webview.MAWebViewWrapper {
+          - mapWebViewClient : WebViewClient
+          - webView : WebView
+          + MAWebViewWrapper()
+          + addAMapJavascriptInterface()
+          + addView()
+          + evaluateJavascript()
+          + getHeight()
+          + getWidth()
+          + loadUrl()
+          + setWebViewClient()
       }
     }
   }
@@ -27,6 +23,10 @@ title __MEIYONG.APP's Class Diagram__\n
   namespace com.example.meiyong {
     namespace webview {
       class com.example.meiyong.webview.MyWebView {
+          + MyWebView()
+          + MyWebView()
+          + MyWebView()
+          - initBridgeWebView()
       }
     }
   }
@@ -35,6 +35,16 @@ title __MEIYONG.APP's Class Diagram__\n
   namespace com.example.meiyong {
     namespace webview {
       class com.example.meiyong.webview.WebviewMapActivity {
+          - aMapWrapper : AMapWrapper
+          - addMapButton : Button
+          - initButton : Button
+          - isAdded : boolean
+          - isCreated : boolean
+          - latlng : LatLng
+          - mainLayout : LinearLayout
+          + onClick()
+          # onCreate()
+          # onDestroy()
       }
     }
   }
@@ -43,6 +53,8 @@ title __MEIYONG.APP's Class Diagram__\n
   namespace com.example.meiyong {
     namespace webview {
       class com.example.meiyong.webview.WebviewTestActivity {
+          - mainLayout : LinearLayout
+          # onCreate()
       }
     }
   }

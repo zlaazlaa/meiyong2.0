@@ -58,11 +58,15 @@ class SendExpress : AppCompatActivity() {
 
             val jsonObjects = JSONObject()
             jsonObjects
+                .put("userId", "")
+                .put("expectedTime", findViewById<TextView>(R.id.time_set_is).text.toString())
+                .put("deliveryAddress", 2)
                 .put("receiverName", receiveName.toString())
                 .put("phone", receivePhone.toString())
-                .put("deliveryAddress", 1)
-                .put("packagePos", "aa")
+//                .put("deliveryAddress", 1)
+                .put("packagePos", "25-5-4")
                 .put("stationId", 2)
+                .put("status",1)
             OkHttp.post("/Order", jsonObjects, object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     TODO("Not yet implemented")
