@@ -56,9 +56,10 @@ class SendExpress : AppCompatActivity() {
             val receiveName = findViewById<TextView>(R.id.name_edited2).text
             val receivePhone = findViewById<TextView>(R.id.phone_number_edited2).text
 
+
             val jsonObjects = JSONObject()
             jsonObjects
-                .put("userId", "")
+                .put("userId", UserInformation.userId.toString())
                 .put("expectedTime", findViewById<TextView>(R.id.time_set_is).text.toString())
                 .put("deliveryAddress", 2)
                 .put("receiverName", receiveName.toString())
@@ -79,6 +80,7 @@ class SendExpress : AppCompatActivity() {
                 }
 
             })
+
             finish()
         }
 

@@ -91,7 +91,7 @@ class ManageOrders : AppCompatActivity() {
                 val jsonObject = JSONObject()
                 val id = viewHolder.orderId.text.toString().toLong()
                 val status = viewHolder.orderStatus.text.toString()
-                if (status != "3") {
+                if (status.toInt() <= 3) {
                     Toast.makeText(context, "订单未在派送", Toast.LENGTH_LONG).show()
                 } else {
                     jsonObject
@@ -103,11 +103,11 @@ class ManageOrders : AppCompatActivity() {
                         }
 
                         override fun onResponse(call: Call, response: Response) {
-                            val responseData = response.body?.string()
+                            val responseData = response.body.toString()
                             Looper.prepare()
-                            Toast.makeText(context, "$responseData", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, responseData, Toast.LENGTH_LONG).show()
                             Looper.loop()
-                            Log.e("OKHTTP_CANCEL_ORDER", "$responseData")
+                            Log.e("OKHTTP_CANCEL_ORDER", responseData)
                         }
 
                     })

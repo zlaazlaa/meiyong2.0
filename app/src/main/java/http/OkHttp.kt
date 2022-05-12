@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 
 
 object OkHttp {
-    private const val BASE_URL = "http://192.168.0.119:80"
+    private const val BASE_URL = "http://192.168.0.140:80"
 
     //    private const val BASE_URL = "http://192.168.0.114:8081"
     private var url1: String = ""
