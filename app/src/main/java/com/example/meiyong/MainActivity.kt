@@ -54,8 +54,8 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-//        val GPSSSS = GPSGetClass()
-//        GPSSSS.LoginGPS()
+        val GPSSSS = GPSGetClass()
+        GPSSSS.LoginGPS()
 
 //        GetAMapWrapper().getAMapWrapper(this)
 

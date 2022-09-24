@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.meiyong.MyApplication.Companion.context
+import com.example.meiyong.ReturnDataClass.OrderCancelReturn.OrderCancelReturn
 import com.example.meiyong.ReturnDataClass.OrderListReturn.OrderListReturn
 import com.example.meiyong.ReturnDataClass.OrderReturn.Body
 import com.google.android.material.button.MaterialButton
@@ -87,11 +88,14 @@ class ManageOrders : AppCompatActivity() {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.order_information_card, parent, false)
             val viewHolder = ViewHolder(view)
+            viewHolder.cuiOrder.setOnClickListener {
+                Toast.makeText(context, "催促成功，将优先安排配送", Toast.LENGTH_LONG).show()
+            }
             viewHolder.cancelOrder.setOnClickListener {
                 val jsonObject = JSONObject()
                 val id = viewHolder.orderId.text.toString().toLong()
                 val status = viewHolder.orderStatus.text.toString()
-                if (status.toInt() <= 3) {
+                if (status.toInt() <= -1) {
                     Toast.makeText(context, "订单未在派送", Toast.LENGTH_LONG).show()
                 } else {
                     jsonObject
@@ -103,11 +107,23 @@ class ManageOrders : AppCompatActivity() {
                         }
 
                         override fun onResponse(call: Call, response: Response) {
-                            val responseData = response.body.toString()
+                            val responseData = response.body?.string()
                             Looper.prepare()
-                            Toast.makeText(context, responseData, Toast.LENGTH_LONG).show()
+                            val gson = Gson()
+
+                            if (responseData != null) {
+                                val orderCancelReturn =
+                                    gson.fromJson(responseData, OrderCancelReturn::class.java)
+                                var text = ""
+                                if (orderCancelReturn.status == 200) {
+                                    text = "取消成功"
+                                } else {
+                                    text = "订单当前状态不允许取消"
+                                }
+                                Toast.makeText(context, text, Toast.LENGTH_LONG).show()
+                                Log.e("OKHTTP_CANCEL_ORDER", responseData)
+                            }
                             Looper.loop()
-                            Log.e("OKHTTP_CANCEL_ORDER", responseData)
                         }
 
                     })

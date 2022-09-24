@@ -30,11 +30,6 @@ class HomeFragment : Fragment() {
 
     val StudyAPIurl =
         "http://123.56.232.18:8080/serverdemo/tag/queryTagList?offset=1231321&pageCount=10&tagId=3&tagType=all&userId=33"
-    val SunAPIurl = "http://192.168.0.127:80/Order"
-
-    val PanAPIurl = "http://192.168.0.114:8081/api/tbSendOrder/list"
-
-    val YuAPIurl = "http://192.168.0.112:8081/api/tbPickOrder/list"
     private var expressList = ArrayList<StudyjsonExpressData>()
 
     private var _binding: FragmentHomeBinding? = null
@@ -303,7 +298,7 @@ class HomeFragment : Fragment() {
             }
 
         view?.findViewById<MaterialButton>(R.id.btn2)?.setOnClickListener {
-            val intent = Intent(activity, SendExpress::class.java)
+            val intent = Intent(activity, NewNobodyCarOrder::class.java)
             startActivity(intent)
         }
     }

@@ -46,7 +46,7 @@ class GPSGetClass {
             .add("coorType", "bd09ll")//BaiduMap
 //            .add("coorType", "GCJ02")//GoogleMap
 //            .add("token", GPSLoginInformation.data.token)
-            .add("token", "8e1f56bf0e78669fdf774c91c55ed0f147047d1eb4b2ecf7284c90924c0b30ff")
+            .add("token", GPSLoginInformation.data.token)
             .build()
         http.GPSOkHttp.post("/locator-app/redis/getGps", GetGPSFormBody, object : Callback {
             override fun onFailure(call: Call, e: IOException) {

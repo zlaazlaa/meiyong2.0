@@ -41,6 +41,7 @@ class LoginDataSource {
                     if (loginReturn.status == 200) {
                         tag = 1
 //                        TODO("添加userID")
+                        UserInformation.userId = loginReturn.body.userId
                     } else {
                         tag = 0
                     }
